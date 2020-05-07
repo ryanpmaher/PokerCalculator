@@ -33,23 +33,33 @@ public class Get1v1Odds {
 			mine.addCard(board.get(i));
 			d.removeCard(board.get(i));
 		}
+		for(int j=1;j<53;j++) {
+			if(d.inDeck(j)) {
+				Card k = d.removeCard(j);
+				opp.addCard(k);
+				mine.addCard(k);
+				for(int i = j+1;i<53;i++) {
+					if(d.inDeck(i)) {
+						total++;
+						Card c = d.removeCard(i);
+						opp.addCard(c);
+						mine.addCard(c);
+						Long oppScore = opp.getBest();
+						Long myScore = mine.getBest();
+						
 		
-		for(int i = 1;i<53;i++) {
-			if(d.inDeck(i)) {
-				total++;
-				Card c = d.removeCard(i);
-				opp.addCard(c);
-				mine.addCard(c);
-				Long oppScore = opp.getBest();
-				Long myScore = mine.getBest();
-				
-
-				if(Long.compare(myScore, oppScore)>0) {
-					wins++;
+						if(Long.compare(myScore, oppScore)>0) {
+							wins++;
+						}
+						opp.removeCard(c);
+						mine.removeCard(c);
+						d.addCard(c);
+					}
 				}
-				opp.removeCard(c);
-				mine.removeCard(c);
+				opp.removeCard(k);
+				mine.removeCard(k);
 			}
+			
 		}
 		return wins/total;
 	}
@@ -66,15 +76,14 @@ public class Get1v1Odds {
 		ArrayList<Card> board = new ArrayList<Card>();
 		
 		mine.add(new Card(14,4));
-		mine.add(new Card(13,4));
+		mine.add(new Card(12,4));
 		
 		opp.add(new Card(6,1));
-		opp.add(new Card(7,1));
+		opp.add(new Card(7,2));
 		
-		board.add(new Card(5,1));
+		board.add(new Card(6,2));
 		board.add(new Card(4,1));
-		board.add(new Card(13,3));
-		board.add(new Card(14,3));
+		board.add(new Card(11,3));
 		
 		Get1v1Odds g = new Get1v1Odds(mine,opp,board);
 		System.out.println("Odds to win: " + g.getOdds());

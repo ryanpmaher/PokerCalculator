@@ -31,6 +31,9 @@ public class Deck {
 	public boolean inDeck(int c) {
 		return deck.containsKey(c);
 	}
+	public void addCard(Card c) {
+		deck.put(c.getCardId(), c);
+	}
 	private void addAll52() {
 		//adds all cards to deck
 		int counter = 1;
