@@ -27,40 +27,61 @@ public class Get1v1Odds {
 			opp.addCard(oppHand.get(i));
 			d.removeCard(oppHand.get(i));
 		}
-		
 		for(int i = 0;i<board.size();i++) {
 			opp.addCard(board.get(i));
 			mine.addCard(board.get(i));
 			d.removeCard(board.get(i));
 		}
-		for(int j=1;j<53;j++) {
-			if(d.inDeck(j)) {
-				Card k = d.removeCard(j);
-				opp.addCard(k);
-				mine.addCard(k);
-				for(int i = j+1;i<53;i++) {
-					if(d.inDeck(i)) {
-						total++;
-						Card c = d.removeCard(i);
-						opp.addCard(c);
-						mine.addCard(c);
-						Long oppScore = opp.getBest();
-						Long myScore = mine.getBest();
-						
-		
-						if(Long.compare(myScore, oppScore)>0) {
-							wins++;
-						}
-						opp.removeCard(c);
-						mine.removeCard(c);
-						d.addCard(c);
-					}
-				}
-				opp.removeCard(k);
-				mine.removeCard(k);
-			}
+		if(mine.hand.size()==5) {
+			for(int j=1;j<53;j++) {
+				if(d.inDeck(j)) {
+					Card k = d.removeCard(j);
+					opp.addCard(k);
+					mine.addCard(k);
+					for(int i = j+1;i<53;i++) {
+						if(d.inDeck(i)) {
+							total++;
+							Card c = d.removeCard(i);
+							opp.addCard(c);
+							mine.addCard(c);
+							Long oppScore = opp.getBest();
+							Long myScore = mine.getBest();
+							
 			
+							if(Long.compare(myScore, oppScore)>0) {
+								wins++;
+							}
+							opp.removeCard(c);
+							mine.removeCard(c);
+							d.addCard(c);
+						}
+					}
+					opp.removeCard(k);
+					mine.removeCard(k);
+				}
+				
+			}
+		} else if(mine.hand.size()==6) {
+			for(int i = 1;i<53;i++) {
+				if(d.inDeck(i)) {
+					total++;
+					Card c = d.removeCard(i);
+					opp.addCard(c);
+					mine.addCard(c);
+					Long oppScore = opp.getBest();
+					Long myScore = mine.getBest();
+					
+	
+					if(Long.compare(myScore, oppScore)>0) {
+						wins++;
+					}
+					opp.removeCard(c);
+					mine.removeCard(c);
+					d.addCard(c);
+				}
+			}
 		}
+		
 		return wins/total;
 	}
 	private void printHand(ArrayList<Card> choose5) {
@@ -82,8 +103,10 @@ public class Get1v1Odds {
 		opp.add(new Card(7,2));
 		
 		board.add(new Card(6,2));
-		board.add(new Card(4,1));
+		board.add(new Card(4,4));
 		board.add(new Card(11,3));
+		board.add(new Card(5,4));
+		
 		
 		Get1v1Odds g = new Get1v1Odds(mine,opp,board);
 		System.out.println("Odds to win: " + g.getOdds());

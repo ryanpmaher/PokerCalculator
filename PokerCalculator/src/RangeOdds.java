@@ -26,18 +26,22 @@ public class RangeOdds {
 		ArrayList<Card> opp1 = new ArrayList<Card>();
 		ArrayList<Card> opp2 = new ArrayList<Card>();
 		
-		mine.add(new Card(14,4));
-		mine.add(new Card(12,4));
+		mine.add(new Card(8,3));
+		mine.add(new Card(8,2));
 		
-		opp1.add(new Card(6,1));
-		opp1.add(new Card(7,2));
+		opp1.add(new Card(14,1));
+		opp1.add(new Card(5,1));
 		
-		opp2.add(new Card(13,1));
-		opp2.add(new Card(14,2));
+		opp2.add(new Card(14,1));
+		opp2.add(new Card(12,3));
+		
+
 				
-		board.add(new Card(6,2));
 		board.add(new Card(4,1));
-		board.add(new Card(11,3));
+		board.add(new Card(6,3));
+		board.add(new Card(7,4));
+		board.add(new Card(12,1));
+
 		
 		RangeOdds r = new RangeOdds();
 		r.addOppHand(opp1);
