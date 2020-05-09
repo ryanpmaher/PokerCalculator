@@ -14,15 +14,28 @@ public class Card {
 		suit = s;
 		str = makeStr();
 		
-		//Load image
+/*		//Load image
 		String imageStr = "C:\\Users\\Ryan Maher\\Desktop\\NewWorkspace\\PokerCalculator\\Graphics\\Cards\\"+str+".png";
 		try {
 		    img = ImageIO.read(new File(imageStr));
 		} catch (IOException e) {
 			System.out.println(e.toString()+"\nError loading image from string: "+imageStr);
 			
-		}
+		}*/
 	}
+	Card(int id){
+		suit = id%4;
+		id-=suit;
+		
+		if(suit==0) {
+			id-=4;
+			suit =4;
+		}
+		value = id/4 +2;
+		str = makeStr();
+		
+	}
+
 	private String makeStr() {
 		String suitS="";
 		String valS;
